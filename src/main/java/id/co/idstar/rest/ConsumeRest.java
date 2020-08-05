@@ -1,5 +1,7 @@
 package id.co.idstar.rest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +22,12 @@ public class ConsumeRest {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	private static final Logger LOGGER = LogManager.getLogger(ConsumeRest.class);
 
 	@PostMapping("/get-employee")
 	public ConsumeResponse<Employee> getEmployeeById(@RequestBody Request request) throws JsonMappingException, JsonProcessingException {
+		LOGGER.debug("testing");
 		return employeeService.getEmployeeById(request.getId());
 	}
 
